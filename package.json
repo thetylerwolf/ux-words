@@ -1,0 +1,22 @@
+{
+  "name": "vida-visualization",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --inline --open",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tyler Wolf",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "d3": "^4.2.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.15.1"
+  }
+}
