@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "webpack -p --inline --progress",
     "dev": "webpack-dev-server --inline --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
