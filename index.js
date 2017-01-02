@@ -16,10 +16,6 @@ const count = (word) => +word.count
 const wordId = (word) => word.word
 const textContent = (word) => word.word.charAt(0).toUpperCase() + word.word.slice(1)
 
-const collisionPadding = 4
-const minCollisionRadius = 12
-const jitter = 0.5
-
 var label,
     countLabel,
     container,
@@ -226,4 +222,5 @@ function addWord(word) {
     redraw()
     // force.restart()
     // force.alphaTarget(1)
+
 }
