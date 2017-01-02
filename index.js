@@ -69,7 +69,7 @@ var force = d3.forceSimulation()
         .iterations(16)
         .strength(1)
     )
-    .alphaTarget(0)
+    .alphaTarget(1)
     // .size([width, height])
     .on('tick', tick)
 
@@ -176,7 +176,7 @@ function dragged(d) {
 }
 
 function dragended(d) {
-    if (!d3.event.active) force.alphaTarget(0);
+    if (!d3.event.active) force.alphaTarget(1);
     d.fx = null;
     d.fy = null;
 }
@@ -222,8 +222,8 @@ function addWord(word) {
 
     chartData.push(newWord)
 
-    force.stop()
+    // force.stop()
     redraw()
-    force.restart()
-    force.alphaTarget(1)
+    // force.restart()
+    // force.alphaTarget(1)
 }
