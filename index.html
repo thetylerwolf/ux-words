@@ -1,9 +1,43 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+        <style type="text/css">
+            #chart {
+                height:500px;
+                width:960px;
+            }
+
+            .node circle {
+                opacity:0.7;
+                fill: #ff5533;
+                /*stroke: #66f;*/
+            }
+
+            .node text {
+                fill: black;
+                stroke: none;
+            }
+            .node .count {
+                font-family:sans-serif;
+            }
+
+            .node.hover circle {
+                opacity:0.5;
+            }
+
+            .node.active circle, .node.active.hover circle {
+                opacity:1.0;
+            }
+
+        </style>
 	</head>
 	<body>
+        <input type="text" id="word-input"><button id="word-button">Add</button>
         <svg id="chart"></svg>
+        <div class="selected">
+            <div class="word"></div>
+            <div class="articles"></div>
+        </div>
 	</body>
 	<script src="bundle.js"></script>
 </html>
