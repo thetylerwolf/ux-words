@@ -103,7 +103,7 @@ function draw() {
             .attr('class', 'container')
             .attr('transform', `translate( ${padding.left} , ${padding.top} )`)
 
-    container = d3.select('.container')
+    container = d3.select('g.container')
 
     // label = container.selectAll('')
     redraw()
@@ -145,7 +145,10 @@ function redraw() {
 
     label
         .style('font-size', (d) => Math.max(8, rScale(count(d) / 2)))
-        .attr('transform', function(d) { return `translate( ${ -this.getBBox().width/2 } , ${ rScale(count(d)) - Math.max(8, rScale(count(d)))/1.25 } )` })
+        .attr('transform', function(d) {
+            var w = ( this.getBBox ? this.getBBox() : this.getBoundingClientRect() ).width
+            return `translate( ${ -w/2 } , ${ rScale(count(d)) - Math.max(8, rScale(count(d)))/1.25 } )`
+        })
         .style('width', (d) => 2.5 * rScale(count(d)))
 
     nodeEnter.append('text', 'count')
@@ -156,7 +159,10 @@ function redraw() {
 
     countLabel
         .style('font-size', 10)
-        .attr('transform', function(d) { return `translate( ${ -this.getBBox().width/2 } , ${ Math.max(8, rScale(count(d)))/1.25 } )` })
+        .attr('transform', function(d) {
+            var w = ( this.getBBox ? this.getBBox() : this.getBoundingClientRect() ).width
+            return `translate( ${ -w/2 } , ${ Math.max(8, rScale(count(d)))/1.25 } )`
+        })
 
 }
 
