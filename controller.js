@@ -5,11 +5,9 @@ export default class Controller {
     static displayData(d, data) {
         var word = d.word,
             count = d.count,
-            articles = []
+            articles;
 
-        articles = data.articles.filter((article) => {
-            return !isNaN(+article.wordCount[word])
-        })
+        articles = d.mentions;
 
         var container = d3.select('div.selected')
 
@@ -17,7 +15,7 @@ export default class Controller {
             .html(word.charAt(0).toUpperCase() + word.slice(1))
             .append('span')
             .attr('class', 'count')
-            .html(count + ' times, ' + articles.length + ' articles')
+            .html(count + ' times, ' + d.mentions.length + ' articles')
 
         container.select('.articles')
             .selectAll('div.article').remove()
@@ -29,11 +27,11 @@ export default class Controller {
             .html((article) => article.title)
             .append('span')
             .attr('class', 'count')
-            .html((article) => article.wordCount[word] + ' times')
+            .html((article) => article.count + ' times')
 
         container.select('.articles')
             .selectAll('span')
-            .html((article) => article.wordCount[word] + ' times')
+            .html((article) => article.count + ' times')
 
         container.select('.articles')
             .selectAll('div.article').data(articles)
