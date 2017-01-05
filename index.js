@@ -23,80 +23,84 @@ var label,
     node
 
 var chartData = [
-    { word: "Design", re: /\b(design[a-z]*)\b/gi },
-    { word: "UX", re: /\b(ux[a-z]*)\b/gi },
-    { word: "User", re: /\b(user[a-z]*)\b/gi },
-    { word: "UI", re: /\b(ui[a-z]*)\b/gi },
-    { word: "Interface", re: /\b(interface[a-z]*)\b/gi },
-    { word: "Wrong", re: /\b(wrong[a-z]*)\b/gi },
-    { word: "Right", re: /\b(right[a-z]*)\b/gi },
-    { word: "Create", re: /\b(create[a-z]*)\b/gi },
-    { word: "Problem", re: /\b(problem[a-z]*)\b/gi },
-    { word: "Research", re: /\b(research[a-z]*)\b/gi },
-    { word: "Understand", re: /\b(understand[a-z]*)\b/gi },
-    { word: "HTML", re: /\b(html[a-z]*)\b/gi },
-    { word: "Google", re: /\b(google[a-z]*)\b/gi },
-    { word: "Facebook", re: /\b(facebook[a-z]*)\b/gi },
-    { word: "Apple", re: /\b(apple[a-z]*)\b/gi },
-    { word: "Engage", re: /\b(engage[a-z]*)\b/gi },
-    { word: "Experience", re: /\b(experience[a-z]*)\b/gi },
-    { word: "Chatbot", re: /\b(chatbot[a-z]*)\b/gi },
-    { word: "Bot", re: /\b(bot[a-z]*)\b/gi },
-    { word: "Usability", re: /\b(usability[a-z]*)\b/gi },
-    { word: "Icon", re: /\b(icon[a-z]*)\b/gi },
-    { word: "Invisible", re: /\b(invisible[a-z]*)\b/gi },
-    { word: "Product", re: /\b(product[a-z]*)\b/gi },
-    { word: "App", re: /\b(app[a-z]*)\b/gi },
-    { word: "Process", re: /\b(process[a-z]*)\b/gi },
-    { word: "Leadership", re: /\b(leadership[a-z]*)\b/gi },
-    { word: "Management", re: /\b(management[a-z]*)\b/gi },
-    { word: "Design Organization", re: /\b(leadership[a-z]*)\b/gi },
-    { word: "Workflow", re: /\b(workflow[a-z]*)\b/gi },
-    { word: "Tool", re: /\b(tool[a-z]*)\b/gi },
-    { word: "Wireframe", re: /\b(wireframe[a-z]*)\b/gi },
-    { word: "Prototype", re: /\b(prototype[a-z]*)\b/gi },
-    { word: "Photoshop", re: /\b(photoshop[a-z]*)\b/gi },
-    { word: "Sketch", re: /\b(sketch[a-z]*)\b/gi },
-    { word: "Framer", re: /\b(framer[a-z]*)\b/gi },
-    { word: "Code", re: /\b(code[a-z]*)\b/gi },
-    { word: "Web", re: /\b(web[a-z]*)\b/gi },
-    { word: "Work", re: /\b(work[a-z]*)\b/gi },
-    { word: "Natural", re: /\b(natural[a-z]*)\b/gi },
-    { word: "Expert", re: /\b(expert[a-z]*)\b/gi },
-    { word: "Different", re: /\b(different[a-z]*)\b/gi },
-    { word: "AI", re: /\b(ai[a-z]*)\b/gi },
-    { word: "Conversational", re: /\b(conversational[a-z]*)\b/gi },
-    { word: "Context", re: /\b(context[a-z]*)\b/gi },
-    { word: "Mobile", re: /\b(mobile[a-z]*)\b/gi },
-    { word: "Desktop", re: /\b(desktop[a-z]*)\b/gi },
-    { word: "Automated", re: /\b(automated[a-z]*)\b/gi },
-    { word: "Think", re: /\b(think[a-z]*)\b/gi },
-    { word: "Material Design", re: /\b(material design[a-z]*)\b/gi },
-    { word: "Computer", re: /\b(computer[a-z]*)\b/gi }
+    "Design",
+    "People",
+    "Product",
+    "Time",
+    "User",
+    "Make",
+    "Work",
+    "Just",
+    "Experience",
+    "Need",
+    "Most",
+    "Material Design",
+    "Think",
+    "No",
+    "Designer",
+    "Different",
+    "See",
+    "Problem",
+    "UX",
+    "Information",
+    "Right",
+    "Team",
+    "World",
+    "Same",
+    "Process",
+    "Best",
+    "Look",
+    "Great",
+    "Understand",
+    "Products",
+    "Human",
+    "Research",
+    "Interface",
+    "Over",
+    "Help",
+    "Create",
+    "Thinking",
+    "Visual",
+    "Feel",
+    "Important",
+    "Actually",
+    "Using",
+    "Making",
+    "App",
+    "Google",
+    "Story",
+    "Still",
+    "Feedback",
+    "Icons",
+    "Facebook",
+    "Apple"
 ]
 
-chartData.forEach(topic);
+chartData = chartData.map((word) => {
+    return {
+        word: word,
+        re: new RegExp("\\b(" + word.toLowerCase() + ")\\b", "gi"),
+        x: canvasWidth/2,
+        y: canvasHeight/2
+    }
+})
+
+chartData.forEach(topic)
 
 var xMax = d3.max(chartData.map(word => word.count))
 
 var force = d3.forceSimulation()
-    .force('y', d3.forceY(0))
-    .force('gravity', d3.forceManyBody()
-        // .strength(function(d) {
-        //     return 10 * xMax/d.count
-        // })
-        .strength(80)
-    )
-    // .force('gravity', d3.forceManyBody().strength(1000))
-    .force('charge', d3.forceManyBody())//.strength(0))
-    .force('center', d3.forceCenter(canvasWidth / 2, canvasHeight / 2))
+    .force('y', d3.forceY().strength(0.5).y(canvasHeight/2))
+    .force('x', d3.forceX().strength(0.1).x(canvasWidth/2))
+    .force('charge', d3.forceManyBody().strength(-0.3))
+    // .force('center', d3.forceCenter(canvasWidth / 2, canvasHeight / 2))
     .force('collide', d3.forceCollide(function(d) {
             return rScale(count(d)) + 3
         })
-        .iterations(16)
+        .iterations(8)
         .strength(1)
     )
-    .alphaTarget(1)
+    .alphaTarget(0)
     .on('tick', tick)
 
 init()
@@ -208,7 +212,7 @@ function dragged(d) {
 }
 
 function dragended(d) {
-    if (!d3.event.active) force.alphaTarget(1);
+    if (!d3.event.active) force.alphaTarget(0);
     d.fx = null;
     d.fy = null;
 }
@@ -271,14 +275,15 @@ function addTopic(word) {
 
     if(check) return click(check)
 
-    t.x = width + 20
-    t.y = -20
+    t.x = width
+    t.y = 0
 
     chartData.push(t);
 
     // force.stop()
     redraw()
-    // force.restart()
+    force.alpha(0.1)
+    force.restart()
     // force.alphaTarget(1)
     click(t)
 
