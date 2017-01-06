@@ -174,16 +174,25 @@ function redraw() {
     nodeEnter.append('text')
         .attr('class', 'label')
         .text(textContent)
-
-    label = container.selectAll('text.label')
-
-    label
-        .style('font-size', (d) => Math.max(8, rScale(count(d) / 2)))
+        .style('font-size', (d) => Math.max(8, rScale(count(d) / 2)) + 'px')
         .attr('transform', function(d) {
             var w = ( this.getBBox ? this.getBBox() : this.getBoundingClientRect() ).width
             return `translate( ${ -w/2 } , ${ rScale(count(d)) - Math.max(8, rScale(count(d)))/1.25 } )`
         })
-        .style('width', (d) => 2.5 * rScale(count(d)))
+        .style('width', (d) => 2.5 * rScale(count(d)) + 'px')
+
+    label = container.selectAll('text.label')
+
+    // label
+        // .style('font-size', (d) => {
+        //     console.log('selected', this)
+        //     return Math.max(8, rScale(count(d) / 2))
+        // })
+        // .attr('transform', function(d) {
+        //     var w = ( this.getBBox ? this.getBBox() : this.getBoundingClientRect() ).width
+        //     return `translate( ${ -w/2 } , ${ rScale(count(d)) - Math.max(8, rScale(count(d)))/1.25 } )`
+        // })
+        // .style('width', (d) => 2.5 * rScale(count(d)))
 
     nodeEnter.append('text', 'count')
         .attr('class', 'count')
