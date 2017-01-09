@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 import * as data from './data/ux-words.json'
 import Controller from './controller'
 
-const canvasWidth = 960,
+const canvasWidth = 910,
     canvasHeight = 500,
     padding = { top: 20, right: 20, bottom: 20, left: 20 },
     maxRadius = 70
@@ -154,7 +154,7 @@ function redraw() {
     node.exit().remove()
 
     var nodeEnter = node.enter()
-        .append('a')
+        .append('g')
         .attr('class', 'node')
         // .attr('xlink:href', (d) => `${ encodeURIComponent(wordId(d)) }`)
         .on('click', click)
